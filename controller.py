@@ -1,6 +1,7 @@
 from sqlalchemy import or_, and_
 import subprocess
 import shlex
+import os
 
 import ablauf
 
@@ -127,13 +128,17 @@ def filter_cancel(segment):
 
 
 def start_game(segment):
-        # start game
-    _segment = ablauf.Automate.model.actual_segment
-    _data = ablauf.Data.session["actual_game"]
-    _dbemulators = ablauf.Data.db_objects["emulator"]
-    _emulator = ablauf.Data.db_session.query(_dbemulators).filter(_dbemulators.system_id == _data.system.id).one()
-    _executable = _emulator.executable
-    _options = _emulator.emulatorconfiguration.configuration
-    _game_files = ablauf.Data.db_objects["game_files"]
-    _file = ablauf.Data.session["home"] + "/data/executables/" + ablauf.Data.db_session.query(_game_files).filter(_game_files.game_id == _data.id).one().file
-    subprocess.call(shlex.split(_executable + " " + _options + " " + "\"" +_file + "\""))
+    # start game
+    try:
+        _data = ablauf.Data.session["actual_game"]
+        _dbemulators = ablauf.Data.db_objects["emulator"]
+        _emulator = ablauf.Data.db_session.query(_dbemulators).filter(_dbemulators.system_id == _data.system.id).one()
+        _executable = _emulator.executable
+        _options = _emulator.emulatorconfiguration.configuration
+        _game_files = ablauf.Data.db_objects["game_files"]
+        _file = os.path.join(ablauf.Data.session["home"],"data","game","executables", ablauf.Data.db_session.query(_game_files).filter(_game_files.game_id == _data.id).one().file)
+
+        subprocess.call(shlex.split(_executable + " " + _options + " " + " \"" +_file + "\""))
+        subprocess.call(shlex.split(_executable + " \"" + _file + "\""))
+    except Exception as ex:
+        print(ex.message)

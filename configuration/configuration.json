@@ -4,9 +4,12 @@
   "reaction_delay": 10,
   "year_of_release": "2016",
   "author": "Master Coder ^ Ablauf Coder Masters",
-  "height": 810,
+  "width": 1280,
+  "height": 960,
+  "flags": [
+    "NOFRAME"
+  ],
   "input_handler": "steuer",
-  "width": 1060,
   "version": "0.06",
   "fps": 0,
   "cursor_visible": false,
