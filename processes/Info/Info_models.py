@@ -1,16 +1,16 @@
 import ablauf
-import ablauf.model
+import model
 
 # Models
 # =============================================================================
-class InitModel(ablauf.model.DefaultModel):
+class InitModel(model.GlobalApplicationModel):
     def __init__(self, process_name, controller_name):
         ablauf.model.DefaultModel.__init__(self, process_name, controller_name)
 
 # <ab> start id:info_form
 # info_form model
 # =============================================================================
-class info_formModel(ablauf.model.DefaultModel):
+class info_formModel(model.GlobalApplicationModel):
     def __init__(self,process_name, controller_name):
         ablauf.model.DefaultModel.__init__(self, process_name, controller_name)
 

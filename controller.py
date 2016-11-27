@@ -83,15 +83,19 @@ def get_number_of_player_filter():
 
 
 def game_page_down(segment):
-    if segment.parent.page > 0:
-        segment.parent.page -= 1
-        game_reload(segment)
+    _game_grid = ablauf.Automate.model.grid_by_name['game']
+    _game_segment = _game_grid.segments[_game_grid.actual_segment]
+    if _game_grid.page > 0:
+        _game_segment.parent.page -= 1
+        game_reload(_game_segment)
 
 
 def game_page_up(segment):
-    if ablauf.Data.session["game_count"] > (segment.parent.page + 1) * segment.parent.max_segments:
-        segment.parent.page += 1
-        game_reload(segment)
+    _game_grid = ablauf.Automate.model.grid_by_name['game']
+    _game_segment = _game_grid.segments[_game_grid.actual_segment]
+    if ablauf.Data.session["game_count"] > (_game_grid.page + 1) * _game_grid.max_segments:
+        _game_segment.parent.page += 1
+        game_reload(_game_segment)
 
 
 def change_name_filter(segment):

@@ -5,9 +5,8 @@
   "year_of_release": "2016",
   "author": "Master Coder ^ Ablauf Coder Masters",
   "width": 1280,
-  "height": 960,
+  "height": 940,
   "flags": [
-    "NOFRAME"
   ],
   "input_handler": "steuer",
   "version": "0.06",
